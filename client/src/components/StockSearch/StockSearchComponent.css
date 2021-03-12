@@ -1,0 +1,12 @@
+.stock-search {
+  width: auto;
+}
+
+.dropdown-content.is-active {
+  position: absolute; 
+  width: auto; 
+}
+
+.dropdown-item {
+  width: inherit;
+}
