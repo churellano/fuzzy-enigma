@@ -1,8 +1,7 @@
 import { Component } from 'react'
 import { debounce } from 'lodash';
-import { getData } from '../../helpers/http';
-import { IEX_API } from '../../constants';
-import { IEX_API_KEY_PROD, IEX_API_KEY_SANDBOX } from '../../api-keys';
+// import { IEX_API } from '../../constants';
+// import { IEX_API_KEY_PROD, IEX_API_KEY_SANDBOX } from '../../api-keys';
 import './StockSearchComponent.css';
 
 import { StockMarketServiceContext } from '../../services/StockMarketService';
@@ -29,7 +28,6 @@ class StockSearch extends Component {
     } else {
       this.setState({ searchResults: [] });
     }
-
   }
 
   render() {
