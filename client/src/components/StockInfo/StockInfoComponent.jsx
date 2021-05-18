@@ -47,6 +47,7 @@ class StockInfo extends Component {
     console.log(name, value);
     this.setState(({ [name]: value }), () => {
       if (name === 'selectedRange') {
+        this.setState(({ historicalPrices: [] }));
         this.fetchHistoricalPrices(this.props.match.params.symbol, this.state.selectedRange);
       }
     });
@@ -74,9 +75,9 @@ class StockInfo extends Component {
 
         if (this.state.selectedRange === '5y') {
           let indexesOfFirstTradingDays = this.findIndexesOfFirstTradingDays(historicalPrices)
-          this.setState(({ historicalPrices, indexesOfFirstTradingDays }), () => console.log('After setState', this.state));
+          this.setState(({ historicalPrices, indexesOfFirstTradingDays }), () => console.log('After setState 5y', this.state));
         } else {
-          this.setState(({ historicalPrices}));
+          this.setState(({ historicalPrices}), () => console.log('After setState', this.state));
         }
       });
   }
@@ -236,7 +237,7 @@ class StockInfo extends Component {
     console.log('createChartConfiguration called')
     let priceChange = (this.state.latestPrice - this.state.previousClose).toFixed(2);
     let chartProps = {
-      type: 'line',
+      type: 'LineWithLine',
       data: {
         labels: this.formatLabels(),
         datasets: [
@@ -269,7 +270,10 @@ class StockInfo extends Component {
               beginAtZero: false,
             }
           }]
-        }
+        },
+        tooltips: {
+          intersect: false
+       }
       }
     };
 
@@ -408,30 +412,27 @@ class StockInfo extends Component {
     </div>
   );
 
-  render() {
-    let view;
-    console.log('check', this.state.historicalPrices.length > 0);
-    if (this.state.companyName && this.state.historicalPrices.length > 0) { 
-      view = (
-        <div className='container'>
-          {this.renderCompanyName()}
-          {this.renderPriceInfo()}
-          {this.renderChart()}
-          <div className='columns'>
-            <div className='column'>
-              {this.renderHoldings()}
-            </div>
-            <div className='column'>
-              {this.renderStatistics()}
-            </div>
-          </div>
+  renderPage = () => (
+    <div className='container'>
+      {this.renderCompanyName()}
+      {this.renderPriceInfo()}
+      {this.renderChart()}
+      <div className='columns'>
+        <div className='column'>
+          {this.renderHoldings()}
         </div>
-      );
-    } else {
-      view = null;
-    }
+        <div className='column'>
+          {this.renderStatistics()}
+        </div>
+      </div>
+    </div>
+  );
 
-    return view;
+  // TODO: Add loading animation/graphic
+  renderLoadingState = () => null;
+
+  render() {
+    return this.state.companyName ? this.renderPage() : this.renderLoadingState();
   }
 }
 
