@@ -5,11 +5,12 @@ import App from './components/App/App';
 import reportWebVitals from './reportWebVitals';
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCaretUp, faCaretDown } from '@fortawesome/free-solid-svg-icons'
+import { faCaretUp, faCaretDown, faChartPie } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
   faCaretUp,
-  faCaretDown
+  faCaretDown,
+  faChartPie
 );
 
 ReactDOM.render(

@@ -8,7 +8,7 @@ export default function Navbar() {
     <nav className='navbar' role='navigation' aria-label='main navigation'>
       <div className='navbar-brand'>
         <a className="navbar-item" href="/home">
-          <img src="https://bulma.io/images/bulma-logo.png" alt="logo" width="112" height="28"/  >
+          <i className="fas fa-chart-pie fa-2x"></i>
         </a>
         <button className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbar">
           <span aria-hidden="true"></span>
